@@ -1,8 +1,8 @@
 <template>
     <div class="header">
-        <div class="header__content">
+        <div class="header-content container">
             <h1> <span>Выберите</span> вашу новую яхту </h1>
-            <div class="header__content-line" />
+            <div class="header-content__line" />
             <p>Ищите, сравнивайте и покупайте лодки с помощью нашего каталого и проверенных экспертов</p>
         </div>
     </div>
@@ -14,9 +14,11 @@
     justify-content: center;
     align-items: center;
 
-    &__content {
+    &-content {
         display: flex;
         flex-flow: column nowrap;
+
+        width: max-content;
 
         & h1 {
             font-family: "Cormorant";
@@ -39,7 +41,7 @@
             color: #8E9FBC;
         }
 
-        &-line {
+        &__line {
             background-color: #FFFFFF;
             opacity: 0.35;
             height: 1px;
@@ -68,8 +70,8 @@
         content: "yachting";
 
         position: absolute;
-        left: 47px;
-        bottom: 43px;
+        left: 45px;
+        bottom: 45px;
 
         font-family: 'Roboto';
         font-size: 12px;

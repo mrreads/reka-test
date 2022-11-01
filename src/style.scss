@@ -15,6 +15,11 @@ body, #app {
   min-height: 100%;
 }
 
+#app {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 body, input, a, button, textarea {
   font-family: 'Roboto', sans-serif;
 }
