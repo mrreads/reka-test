@@ -22,32 +22,32 @@
             </div>
 
             <div class="footer__navigation">
-                <div class="footer__navigation-column">
-                    <p class="footer__navigation-column__item title">Каталог</p>
+                <div class="footer__navigation-column" :data-active='false'>
+                    <p class="footer__navigation-column__item title" @click="navigationToggle">Каталог</p>
                     <a href="#" class="footer__navigation-column__item">Каталог судов</a>
                     <a href="#" class="footer__navigation-column__item">Верфи</a>
                     <a href="#" class="footer__navigation-column__item">Ссылка 3</a>
                     <a href="#" class="footer__navigation-column__item">Ссылка 4</a>
                 </div>
 
-                <div class="footer__navigation-column">
-                    <p class="footer__navigation-column__item title">Маркет</p>
+                <div class="footer__navigation-column" :data-active='true'>
+                    <p class="footer__navigation-column__item title" @click="navigationToggle">Маркет</p>
                     <a href="#" class="footer__navigation-column__item">Маркет судов</a>
                     <a href="#" class="footer__navigation-column__item">Компании по продаже лодок</a>
                     <a href="#" class="footer__navigation-column__item">Ссылка 3</a>
                     <a href="#" class="footer__navigation-column__item">Ссылка 4</a>
                 </div>
 
-                <div class="footer__navigation-column">
-                    <p class="footer__navigation-column__item title">Журнал</p>
+                <div class="footer__navigation-column" :data-active='false'>
+                    <p class="footer__navigation-column__item title" @click="navigationToggle">Журнал</p>
                     <a href="#" class="footer__navigation-column__item">Подписка</a>
                     <a href="#" class="footer__navigation-column__item">О нас</a>
                     <a href="#" class="footer__navigation-column__item">Категория 3</a>
                     <a href="#" class="footer__navigation-column__item">Категория 4</a>
                 </div>
 
-                <div class="footer__navigation-column">
-                    <p class="footer__navigation-column__item title">Пользователю</p>
+                <div class="footer__navigation-column" :data-active='false'>
+                    <p class="footer__navigation-column__item title" @click="navigationToggle">Пользователю</p>
                     <a href="#" class="footer__navigation-column__item">События</a>
                     <a href="#" class="footer__navigation-column__item">Категория 2</a>
                     <a href="#" class="footer__navigation-column__item">Категория 3</a>
@@ -69,7 +69,7 @@
                     <p>Согласие на обработку <a href="#">персональных данных</a></p>
                 </div>
 
-                <button>ПОДПИСАТЬСЯ</button>
+                <div class="footer__mailing-button">ПОДПИСАТЬСЯ</div>
             </div>
 
         </div>
@@ -77,7 +77,7 @@
         <div class="footer__text">
             <div class="container">
                 <p>© 2014-2022 ITBOAT</p>
-                <p style="margin-left: auto">Дизайн и разработка:</p>
+                <p>Дизайн и разработка:</p>
                 <a href="#">REKASTUDIO</a>
             </div>
         </div>
@@ -245,12 +245,11 @@
             }
         }
 
-        & button {
+        &-button {
             margin-top: 35px;
 
-            background-color: #22282D;
-            color: #FFFFFF;
 
+            color: #FFFFFF;
             font-size: 12px;
             line-height: 22px;
             text-align: center;
@@ -258,31 +257,33 @@
             letter-spacing: 0.6px;
             text-transform: uppercase;
 
-            border: 0;
-            outline: 0;
-            padding: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             cursor: pointer;
-            border-radius: 5px;
-
-            overflow: hidden;
-
+            background-image: url('@/assets/images/button_footer.svg');
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            height: 50px;
+            width: 269px;
+            
             position: relative;
-            &::after, &::before {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                content: '';
-                background-color: #FFFFFF;
-                height: 50px;
-                width: 50px;
-                border-radius: 100%;
-            }
             &::after {
-                left: calc(100% - 5px);
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 2px;
+                background-color: #8E9FBC;
+                transition: .6s;
             }
-            &::before {
-                right: calc(100% - 5px);
+            &:hover {
+                &::after {
+                    width: 90px;
+                }
             }
         }
 
@@ -351,8 +352,224 @@
                 color: #7A8084;
                 text-decoration: none;
             }
+
+            & p:nth-child(2) {
+                margin-left: auto;
+            }
         }
 
     }
 }
+
+@media screen and (max-width: 1700px) {
+    .footer__content {
+        display: grid;
+
+        grid-template:
+        "n n"
+        "s m";
+    }
+
+    .footer__media {
+        grid-area: s;
+    }
+    .footer__navigation {
+        grid-area: n;
+        justify-content: space-between;
+
+        border-top: 0;
+        border-bottom: 1px solid #E2E3E3;
+    }
+    .footer__mailing {
+        grid-area: m;
+        justify-self: end;
+
+        border-right: 1px solid #E2E3E3;
+        border-left: 1px solid #E2E3E3;
+    }
+
+    .footer__mailing-title {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .footer__content {
+        grid-template:
+        "s m"
+        "s n";
+        grid-template-columns: 330px 1fr;
+    }
+    .footer__media {
+        width: 330px;
+    }
+    .footer__navigation {
+        justify-content: center;
+        flex-flow: column nowrap;
+
+        width: 100%;
+        gap: 25px;
+
+        &-column {
+            max-height: 55px;
+            transition: .3s all;
+            overflow: hidden;
+
+            width: 100%;
+
+            &__item {
+
+                padding-left: 65px;
+                &:hover:not(.title) {
+                    &::before {
+                        display: none;
+                    }
+                }
+                &.title {
+                    cursor: pointer;
+
+                    padding-top: 4px;
+
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #22282D;
+
+                    width: 100%;
+                    &::before {
+                        width: 100%;
+                        bottom: -25px;
+                    }
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        top: 0;
+                        left: 0;
+                        height: 32px;
+                        width: 32px;
+                        background-image: url('@/assets/images/dropdown.svg');
+                        background-repeat: no-repeat;
+                        background-position: center;
+
+                        transition: .3s all;
+                    }
+                }
+            }
+
+            &:last-child {
+                & .title {
+                    &::before {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            &[data-active=true] {
+                max-height: 600px;
+                margin-bottom: 25px;
+                & .title {
+                    &::before {
+                        opacity: 0;
+                    }
+                    &::after {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+    .footer__mailing {
+        justify-self: center;
+
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer__content {
+        grid-template:
+        "s"
+        "n"
+        "m";
+        grid-template-columns: 1fr;
+    }
+
+    .footer__navigation {
+        &-column {
+            &__item {
+                padding-left: 0;
+                &.title {
+                    &::after {
+                        left: calc(100% - 50px);
+                    }
+                }
+            }
+        }
+    }
+
+    .footer__media {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        border-bottom: 1px solid #E2E3E3;
+    }
+
+    .footer__mailing {
+        align-items: center;
+    }
+
+    .footer__media, .footer__navigation, .footer__mailing {
+        padding: 35px;
+    }
+
+    .footer__text {
+        & .container {
+            flex-flow: row wrap;
+            & p:first-child {
+                width: 100%;
+            }
+            & p:nth-child(2) {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .footer__content {
+        grid-template:
+        "s"
+        "m"
+        "n";
+        grid-template-columns: 1fr;
+    }
+
+    .footer__media {
+        display: none;
+    }
+
+    .footer__mailing {
+        &-input {
+            width: 100%;
+        }
+    }
+    .footer__checkbox-wrapper {
+        width: 100%;
+    }
+
+    .footer__media, .footer__navigation, .footer__mailing {
+        padding: 30px;
+    }
+}
+
 </style>
+
+<script>
+export default {
+    methods: {
+        navigationToggle(e) {
+            let value = e.srcElement.parentElement.dataset.active;
+            e.srcElement.parentElement.dataset.active = (value != 'true') ? true : false;
+        }
+    }
+}
+</script>
