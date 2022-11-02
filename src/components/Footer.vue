@@ -1,3 +1,14 @@
+<script>
+export default {
+    methods: {
+        navigationToggle(e) {
+            let value = e.srcElement.parentElement.dataset.active;
+            e.srcElement.parentElement.dataset.active = (value != 'true') ? true : false;
+        }
+    }
+}
+</script>
+
 <template>
     <div class="footer">
         <div class="footer__content container">
@@ -504,13 +515,14 @@
                 }
             }
         }
+        border-bottom: 0;
     }
 
     .footer__media {
         width: 100%;
         text-align: center;
         align-items: center;
-        border-bottom: 1px solid #E2E3E3;
+        border-bottom: 0;
     }
 
     .footer__mailing {
@@ -562,14 +574,3 @@
 }
 
 </style>
-
-<script>
-export default {
-    methods: {
-        navigationToggle(e) {
-            let value = e.srcElement.parentElement.dataset.active;
-            e.srcElement.parentElement.dataset.active = (value != 'true') ? true : false;
-        }
-    }
-}
-</script>

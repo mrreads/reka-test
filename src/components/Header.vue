@@ -1,5 +1,19 @@
+<script>
+import { inject } from 'vue'
+
+export default {
+    setup() {
+        const { header, updateHeader } = inject('header')
+        return { updateHeader }
+    },
+    mounted() {
+        this.updateHeader(this.$refs.header)
+    }
+}
+</script>
+
 <template>
-    <div class="header">
+    <div class="header" ref="header">
         <div class="header-content container">
             <h1> <span>Выберите</span> вашу новую яхту </h1>
             <div class="header-content__line" />
