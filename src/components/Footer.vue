@@ -41,7 +41,7 @@ export default {
                     <a href="#" class="footer__navigation-column__item">Ссылка 4</a>
                 </div>
 
-                <div class="footer__navigation-column" :data-active='true'>
+                <div class="footer__navigation-column" :data-active='false'>
                     <p class="footer__navigation-column__item title" @click="navigationToggle">Маркет</p>
                     <a href="#" class="footer__navigation-column__item">Маркет судов</a>
                     <a href="#" class="footer__navigation-column__item">Компании по продаже лодок</a>

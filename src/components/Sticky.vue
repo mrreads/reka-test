@@ -87,6 +87,8 @@ export default {
             z-index: 5;
         }
         &__blur {
+            transition: .6s all;
+            transform: scale(1);
             filter: blur(13px);
         }
     }
@@ -118,13 +120,22 @@ export default {
     }
 
     transition: .3s all;
+    
     &[data-top=false] {
         background-color: #FFFFFF;
         & .sticky-icon {
             filter: invert(1);
         }
+        & .sticky-avatar__blur {
+            transform: scale(0.6);
+        }
         border-bottom: 1px solid #E2E3E3;
-        color: #22282D;
+        & p, & a {
+            color: #22282D;
+        }
+        & .sticky-profile {
+            border-left: 1px solid #E2E3E3;
+        }
     }
 }
 </style>
