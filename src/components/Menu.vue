@@ -4,12 +4,22 @@ export default {
         return { journalOpened: false, sidebarOpened: false }
     },
     mounted() {
-        document.addEventListener('scroll', this.handleScrollEvent);
+        window.addEventListener('resize', this.handleResize);
+        window.addEventListener('scroll', this.handleScrollEvent);
     },
     beforeDestroy() {
-        document.removeEventListener('scroll', this.handleScrollEvent);
+        window.removeEventListener('resize', this.handleResize);
+        window.removeEventListener('scroll', this.handleScrollEvent);
     },
     methods: {
+        handleResize() {
+            let width = document.body.clientWidth;
+            if (width > 1280)
+            {
+                if (this.sidebarOpened)
+                    this.sidebarToggle();
+            }
+        },
         handleScrollEvent() {
             let height = 150;
             let scroll = window.scrollY;
@@ -38,10 +48,12 @@ export default {
             {
                 if (this.sidebarOpened)
                 {
+                    document.body.style.overflow = 'hidden';
                     this.$refs.sidebar.style.display = 'flex';
                 }
                 else
                 {
+                    document.body.style.overflow = 'scroll';
                     this.$refs.sidebar.style.display = 'none';
                 }
             }
