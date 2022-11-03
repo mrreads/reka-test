@@ -1,17 +1,3 @@
-<script>
-import { inject } from 'vue'
-
-export default {
-    setup() {
-        const { header, updateHeader } = inject('header')
-        return { updateHeader }
-    },
-    mounted() {
-        this.updateHeader(this.$refs.header)
-    }
-}
-</script>
-
 <template>
     <div class="header" ref="header">
         <div class="header-content container">
@@ -124,7 +110,7 @@ export default {
         background-position: center bottom;
         background-repeat: no-repeat;
         height: 0;
-        width: 215px;
+        min-width: 215px;
         overflow: hidden;
         transition: .3s all;
 

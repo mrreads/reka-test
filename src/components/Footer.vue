@@ -277,7 +277,7 @@ export default {
             background-position: center bottom;
             background-repeat: no-repeat;
             height: 50px;
-            width: 269px;
+            min-width: 269px;
             
             position: relative;
             &::after {
