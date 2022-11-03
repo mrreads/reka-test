@@ -1,11 +1,11 @@
 <script setup>
-import Sticky from './components/Sticky.vue';
+import Menu from './components/Menu.vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 </script>
 
 <template>
-  <Sticky />
+  <Menu />
   <Header />
   <Footer />
 </template>

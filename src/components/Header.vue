@@ -152,7 +152,7 @@
     }
     .header {
         &__button {
-            height: 50px;
+            min-height: 50px;
         }
     }
 

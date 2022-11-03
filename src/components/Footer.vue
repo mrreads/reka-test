@@ -276,7 +276,7 @@ export default {
             background-image: url('@/assets/images/button_footer.svg');
             background-position: center bottom;
             background-repeat: no-repeat;
-            height: 50px;
+            min-height: 50px;
             min-width: 269px;
             
             position: relative;
