@@ -405,6 +405,10 @@
         grid-template-columns: 1fr;
     }
 
+    .footer__text .container {
+        padding: 20px 35px;
+    }
+    
     .footer__navigation {
         &-column {
             &__item {
@@ -456,6 +460,10 @@
         grid-template-columns: 1fr;
     }
 
+    .footer__text .container {
+        padding: 20px 30px;
+    }
+
     .footer__media {
         display: none;
     }
@@ -471,5 +479,13 @@
 
     .footer__media, .footer__navigation, .footer__mailing {
         padding: 30px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .footer__mailing-button {
+        min-height: 50px;
+        min-width: 255px;
+        background-size: contain;
     }
 }

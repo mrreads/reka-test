@@ -32,8 +32,8 @@ export default {
                 <p class="filter-slider__title">Цена</p>
 
                 <div class="filter-slider-values">
-                    <p class="filter-slider-values__slider">от <span> {{ sliderValue[0].toLocaleString().replace(',', ' ') }} </span> </p>
-                    <p class="filter-slider-values__slider" style="margin-left: auto;">до <span> {{ sliderValue[1].toLocaleString().replace(',', ' ') }} </span> </p>
+                    <p class="filter-slider-values__slider">от <span> {{ sliderValue[0].toLocaleString().replaceAll(',', ' ') }} </span> </p>
+                    <p class="filter-slider-values__slider" style="margin-left: auto;">до <span> {{ sliderValue[1].toLocaleString().replaceAll(',', ' ') }} </span> </p>
                     
                     <p @click="(selectedWallet = 'dollar')" :class="this.selectedWallet == 'dollar' ? 'filter-slider-values__wallet active' : 'filter-slider-values__wallet'">$</p>
                     <p @click="(selectedWallet = 'ruble')" :class="this.selectedWallet == 'ruble' ? 'filter-slider-values__wallet active' : 'filter-slider-values__wallet'">₽</p>
