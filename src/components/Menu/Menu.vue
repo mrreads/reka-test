@@ -4,15 +4,13 @@ import './sidebar.scss';
 
 export default {
     data() {
-        return { journalOpened: false, sidebarOpened: false, dropdownOpened: false }
+        return { journalOpened: false, sidebarOpened: false }
     },
     mounted() {
-        window.addEventListener('click', this.outsideClick);
         window.addEventListener('resize', this.handleResize);
         window.addEventListener('scroll', this.handleScrollEvent);
     },
     beforeDestroy() {
-        window.removeEventListener('click', this.outsideClick);
         window.removeEventListener('resize', this.handleResize);
         window.removeEventListener('scroll', this.handleScrollEvent);
     },
@@ -24,22 +22,12 @@ export default {
                 if (this.sidebarOpened)
                     this.sidebarToggle();
             }
-            if (width > 768)
-            {
-                if (this.dropdownOpened)
-                    this.dropdownToggle();
-            }
         },
         handleScrollEvent() {
             let height = 150;
             let scroll = window.scrollY;
             if (this.$refs.sticky)
                 this.$refs.sticky.dataset.top = (scroll > height) ? 'false' : 'true';
-        },
-        outsideClick(e) {
-            let element = e.target;
-            if (!element.closest('.sticky-profile') && this.dropdownOpened)
-                this.dropdownToggle();
         },
         journalToggle() {
             this.journalOpened = !this.journalOpened;
@@ -75,12 +63,6 @@ export default {
 
             if (this.journalOpened)
                 this.journalToggle();
-
-            if (this.dropdownOpened)
-                this.dropdownToggle();
-        },
-        dropdownToggle() {
-            this.dropdownOpened = !this.dropdownOpened;
         }
     },
 }
@@ -108,7 +90,7 @@ export default {
             <div class="sticky__icon chart"> <span class="tooltip">4</span> </div>
 
             <div class="sticky-profile">
-                <div class="sticky-avatar" @click="dropdownToggle">
+                <div class="sticky-avatar">
                     <img class="sticky-avatar__image" src="@/assets/images/avatar.png" />
                     <img class="sticky-avatar__blur" src="@/assets/images/avatar.png" />
                 </div>
@@ -126,7 +108,7 @@ export default {
                     <div class="sticky-profile-burger__item"></div>
                 </div>
 
-                <div class="sticky-dropdown" :class="this.dropdownOpened ? 'active' : ''" ref="dropdown">
+                <div class="sticky-dropdown">
                     <div class="sticky-dropdown__info">
                         <div class="sticky-avatar">
                             <img class="sticky-avatar__image" src="@/assets/images/avatar.png" />

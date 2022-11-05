@@ -1,7 +1,9 @@
 <script>
 import './journal.scss'
+import All from './Gallery.vue';
 
 export default {
+    components: { All },
     data() {
         return { selectedTab: 'all' }
     },
@@ -31,12 +33,12 @@ export default {
             </div>
         </div>
 
-        <p v-if="selectedTab == 'all'" class="journal__title centered">ВСЕ</p>
+        <All v-if="selectedTab == 'all'" />
         <p v-if="selectedTab == 'boat'" class="journal__title centered">Яхты</p>
         <p v-if="selectedTab == 'style'" class="journal__title centered">Стиль жизни</p>
         <p v-if="selectedTab == 'people'" class="journal__title centered">Люди</p>
         <p v-if="selectedTab == 'tech'" class="journal__title centered">Техника</p>
         <p v-if="selectedTab == 'photo'" class="journal__title centered">Фото</p>
-        
+
     </div>
 </template>

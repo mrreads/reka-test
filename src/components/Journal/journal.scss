@@ -28,7 +28,7 @@
         margin-left: 230px;
 
         &.centered {
-            margin-top: 50px;
+            margin-top: 40px;
             margin-left: 0;
         }
     }
@@ -256,14 +256,12 @@
 
                 padding-bottom: 5px;
                 &::-webkit-scrollbar{
-                    height: 2px;
-                    width: 2px;
+                    height: 5px;
+                    width: 5px;
                     border-radius: 1;
                     background: transparent;
-                    background: #FFFFFF;
                 }
                 &::-webkit-scrollbar-thumb:horizontal {
-                    background-color: #E5E5E5;
                     background-color: transparent;
                     border-radius: 5px;
                 }
@@ -293,6 +291,21 @@
                 }
                 &:last-child {
                     margin-right: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    .journal {
+        &-tabs {
+            &-wrapper {
+                &::-webkit-scrollbar{
+                    background: #FFFFFF;
+                }
+                &::-webkit-scrollbar-thumb:horizontal {
+                    background-color: #E5E5E5;
                 }
             }
         }

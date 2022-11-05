@@ -529,7 +529,9 @@
                 display: flex;
             }
         }
-        
+        &-dropdown {
+            display: none !important;
+        }
     }
 }
 
