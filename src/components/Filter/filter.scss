@@ -47,7 +47,10 @@
     &-slider {
         display: flex;
         flex-flow: column nowrap;
-        align-items: flex-start;
+        align-items: stretch;
+
+        width: 480px;
+
         &__title {
             font-weight: 500;
             font-size: 16px;
@@ -62,19 +65,24 @@
             align-items: center;
             gap: 10px;
 
+            width: 100%;
+
             &__slider {
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 22px;
                 color: #22282D;
 
+                display: flex;
+                flex-flow: row nowrap;
                 & span {
                     opacity: .5;
                     margin: 0 5px;
+                    white-space: pre;
                 }
 
                 &:first-child {
-                    margin-right: 85px;
+                    margin-right: 15px;
                 }
             }
             &__wallet {
@@ -105,5 +113,39 @@
                 }
             }
         }
+
+        position: relative;
+        &__item {
+            left: 0;
+            bottom: -10px;
+            position: absolute;
+            width: 100%;
+
+            & .vue-slider {
+                &-rail {
+                    background-color: transparent;
+                }
+                &-process {
+                    background-color: #8E9FBC;
+                }
+                &-dot {
+                    background-color: #FFFFFF;
+                    border: 3px solid #8E9FBC;
+                    border-radius: 100%;
+                    &-handle {
+                        box-sizing: unset;
+                        &-focus {
+                            box-shadow: unset !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .filter {
+        display: none;
     }
 }
