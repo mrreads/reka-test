@@ -1,13 +1,15 @@
 <script>
 export default {
     data() {
-        return { journalOpened: false, sidebarOpened: false }
+        return { journalOpened: false, sidebarOpened: false, dropdownOpened: false }
     },
     mounted() {
+        window.addEventListener('click', this.outsideClick);
         window.addEventListener('resize', this.handleResize);
         window.addEventListener('scroll', this.handleScrollEvent);
     },
     beforeDestroy() {
+        window.removeEventListener('click', this.outsideClick);
         window.removeEventListener('resize', this.handleResize);
         window.removeEventListener('scroll', this.handleScrollEvent);
     },
@@ -19,12 +21,22 @@ export default {
                 if (this.sidebarOpened)
                     this.sidebarToggle();
             }
+            if (width > 768)
+            {
+                if (this.dropdownOpened)
+                    this.dropdownToggle();
+            }
         },
         handleScrollEvent() {
             let height = 150;
             let scroll = window.scrollY;
             if (this.$refs.sticky)
                 this.$refs.sticky.dataset.top = (scroll > height) ? 'false' : 'true';
+        },
+        outsideClick(e) {
+            let element = e.target;
+            if (!element.closest('.sticky-profile') && this.dropdownOpened)
+                this.dropdownToggle();
         },
         journalToggle() {
             this.journalOpened = !this.journalOpened;
@@ -60,6 +72,12 @@ export default {
 
             if (this.journalOpened)
                 this.journalToggle();
+
+            if (this.dropdownOpened)
+                this.dropdownToggle();
+        },
+        dropdownToggle() {
+            this.dropdownOpened = !this.dropdownOpened;
         }
     },
 }
@@ -87,7 +105,7 @@ export default {
             <div class="sticky__icon chart"> <span class="tooltip">4</span> </div>
 
             <div class="sticky-profile">
-                <div class="sticky-avatar">
+                <div class="sticky-avatar" @click="dropdownToggle">
                     <img class="sticky-avatar__image" src="@/assets/images/avatar.png" />
                     <img class="sticky-avatar__blur" src="@/assets/images/avatar.png" />
                 </div>
@@ -103,6 +121,26 @@ export default {
                 <div class="sticky-profile-burger" @click="sidebarToggle">
                     <div class="sticky-profile-burger__item"></div>
                     <div class="sticky-profile-burger__item"></div>
+                </div>
+
+                <div class="sticky-dropdown" :class="this.dropdownOpened ? 'active' : ''" ref="dropdown">
+                    <div class="sticky-dropdown__info">
+                        <div class="sticky-avatar">
+                            <img class="sticky-avatar__image" src="@/assets/images/avatar.png" />
+                            <img class="sticky-avatar__blur" src="@/assets/images/avatar.png" />
+                        </div>
+                        <div>
+                            <p class="sticky-profile__name">Алина Вейдер</p>
+                            <p class="sticky-profile__text">Личные данные </p>
+                        </div>
+                    </div>
+
+                    <div class="sticky-dropdown__line" />
+
+                    <div class="sticky-dropdown__item"> <a href="#">Мои объявления</a> <span class="notification">10</span> </div>
+                    <div class="sticky-dropdown__item"> <a href="#">Мои презенетации</a> <span class="notification">4</span> </div>
+                    <div class="sticky-dropdown__item"> <a href="#">Компания</a> </div>
+                    <div class="sticky-dropdown__logout"> <a href="#">выйти</a> </div>
                 </div>
             </div>
 
@@ -317,11 +355,164 @@ export default {
             & div {
                 display: block;
                 width: 26px;
-                height: 2px;
+                min-height: 2px;
+                max-height: 2px;
                 background-color: #FFFFFF;
 
                 transition: .6s all;
             }
+        }
+
+        padding: relative;
+        &:hover {
+            & .sticky-dropdown {
+                max-height: 280px;
+                padding: 30px;
+
+                opacity: 1;
+                user-select: all;
+                pointer-events: all;
+            }
+        }
+    }
+
+    &-dropdown {
+        position: absolute;
+        bottom: 15px;
+        transform: translateY(100%);
+        right: 25px;
+        
+        display: flex;
+        flex-flow: column nowrap;
+
+        transition: .3s all;
+        max-height: 0px;
+
+        opacity: 0;
+        user-select: none;
+        pointer-events: none;
+
+        min-width: 250px;
+
+        padding: 0 30px;
+        background-color: #FFFFFF;
+        border-radius: 5px;
+
+        color: #7A8084;
+
+
+        & .sticky-profile__name {
+            color: #22282D;
+            justify-content: flex-start;
+
+            font-size: 16px;
+            line-height: 19px;
+
+            text-transform: none;
+        }
+        & .sticky-profile__text {
+            font-size: 12px;
+            line-height: 14px;
+
+            color: #7A8084 !important;
+
+            margin-top: 2px;
+        }
+        &__info {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 15px;
+
+            align-items: flex-end;
+        }
+
+        &__line {
+            min-height: 1px;
+            width: 100%;
+            background-color: #F2F2F2;
+            margin: 15px 0;
+        }
+        &__item {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0 15px;
+
+            margin-bottom: 18px;
+            & a {
+                font-size: 16px;
+                line-height: 22px;
+                color: #7A8084 !important;
+                text-decoration: none;
+
+                position: relative;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0px;
+                    background-color: #E5E5E5;
+                    height: 1px;
+                    width: 0%;
+                    transition: .3s all;
+                }
+                cursor: pointer;
+                &:hover {
+                    &::before {
+                        width: 100%;
+                    }
+                }
+            }
+            & .notification {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px;
+                gap: 10px;
+
+                min-width: 24px;
+                min-height: 24px;
+                max-width: 24px;
+                max-height: 24px;
+
+                background-color: #8E9FBC;
+                box-shadow: 0px 5px 10px rgba(142, 159, 188, 0.26);
+                border-radius: 31px;
+
+                font-size: 12px;
+                line-height: 14px;
+                text-align: center;
+                text-transform: uppercase;
+
+                /* white */
+                color: #FFFFFF;
+            }
+        }
+        &__logout a {
+            margin-top: 7px;
+
+            font-size: 12px;
+            line-height: 22px;
+            text-decoration-line: underline;
+
+            color: #7A8084 !important;
+        }
+
+        box-shadow: 10px 10px 100px rgba(155, 163, 172, 0.25);
+
+        &::before {
+            position: absolute;
+            content: '';
+            top: -4px;
+            right: 15px;
+
+            width: 0px;
+            height: 0px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #FFFFFF;
+
         }
     }
 
@@ -490,7 +681,10 @@ export default {
 @media screen and (max-width: 1440px) {
     .sticky {
         & .container {
-            height: 65px;
+            max-height: 65px;
+        }
+        &-dropdown {
+            bottom: 0px;
         }
         &-menu {
             margin-left: auto;
@@ -529,12 +723,35 @@ export default {
 
 @media screen and (max-width: 768px) {
     .sticky {
-        border-bottom: 0 !important;
+        &:not(.active) {
+            border-bottom: 0 !important;
+        }
+        &-dropdown {
+            right: unset;
+            left: 25px;
+            max-height: 0 !important;
+            padding: 0 30px !important;
+            opacity: 0 !important;
 
+            &::before {
+                left: 28px;
+            }
+
+            & .sticky-profile__name {
+                display: block;
+            }
+            &.active {
+                padding: 30px !important;
+                max-height: 280px !important;
+                opacity: 1 !important;
+                user-select: all;
+                pointer-events: all;
+            }
+        }
         & .container {
             display: flex;
             padding: 0 35px;
-            height: 80px;
+            max-height: 80px;
             flex-flow: row nowrap;
         }
 
@@ -568,6 +785,7 @@ export default {
                 display: none;
             }
             &__avatar {
+                cursor: pointer;
                 order: 1;
             }
 
@@ -594,6 +812,11 @@ export default {
                 height: 20px;
             }
         }
+        &-dropdown {
+            &::before {
+                left: 10px;
+            }
+        }
     }
 }
 </style>
@@ -605,7 +828,7 @@ export default {
 
     overflow: scroll;
 
-    z-index: 25;
+    z-index: 8;
     position: fixed;
     top: 65px;
     height: calc(100% - 65px);
