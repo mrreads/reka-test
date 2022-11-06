@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "swiper": "^8.4.4",
     "vue": "^3.2.41",
+    "vue-dragscroll": "^4.0.5",
     "vue-slider-component": "^4.1.0-beta.6"
   },
   "devDependencies": {
