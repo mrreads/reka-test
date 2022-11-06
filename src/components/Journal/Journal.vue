@@ -23,7 +23,7 @@ export default {
         </div>
 
         <div class="journal-tabs container">
-            <div class="journal-tabs-wrapper" :data-selected="selectedTab">
+            <div class="journal-tabs-wrapper" :data-selected="selectedTab" v-dragscroll>
                 <div @click="selectTab" :class="selectedTab == 'all' ? 'journal-tabs__item active' : 'journal-tabs__item'" data-type="all">ВСЕ</div>
                 <div @click="selectTab" :class="selectedTab == 'boat' ? 'journal-tabs__item active' : 'journal-tabs__item'" data-type="boat">Яхты</div>
                 <div @click="selectTab" :class="selectedTab == 'style' ? 'journal-tabs__item active' : 'journal-tabs__item'" data-type="style">Стиль жизни</div>
