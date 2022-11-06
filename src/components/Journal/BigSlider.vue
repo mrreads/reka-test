@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         updateImage(element, counter) {
-            fetch(`http://jsonplaceholder.typicode.com/photos/${counter}`)
+            fetch(`https://jsonplaceholder.typicode.com/photos/${counter}`)
             .then(response => response.json())
             .then(json => {
                 if (element)
