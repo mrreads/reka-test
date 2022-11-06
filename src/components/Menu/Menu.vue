@@ -1,6 +1,6 @@
 <script>
+import './sticky.scss';
 import './menu.scss';
-import './sidebar.scss';
 
 export default {
     data() {
@@ -51,12 +51,12 @@ export default {
             {
                 if (this.sidebarOpened)
                 {
-                    document.body.style.overflow = 'hidden';
+                    document.body.classList.add('no-scroll')
                     this.$refs.sidebar.style.display = 'flex';
                 }
                 else
                 {
-                    document.body.style.overflow = 'scroll';
+                    document.body.classList.remove('no-scroll')
                     this.$refs.sidebar.style.display = 'none';
                 }
             }
